@@ -49,14 +49,26 @@ module Rpush
         end
 
         def ok(response)
-          results = process_response(response)
-          handle_successes(results.successes)
-
-          if results.failures.any?
-            handle_failures(results.failures, response)
+          #filtering push with reg_ids
+          if @notification.registration_ids
+            results = process_response(response)
+            handle_successes(results.successes)
+            if results.failures.any?
+              handle_failures(results.failures, response)
+            else
+              mark_delivered
+              log_info("#{@notification.id} sent to #{@notification.registration_ids.join(', ')}")
+            end
           else
-            mark_delivered
-            log_info("#{@notification.id} sent to #{@notification.registration_ids.join(', ')}")
+            #handle response for topic(assuming no other implementations exists without reg_ids)
+            #handle message limit exceeded error
+            if error = multi_json_load(response.body)['error']
+              reflect(:gcm_notification_limit_exceeded, @notification.id, error)
+              fail Rpush::DeliveryError.new(nil, @notification.id, "gcm notification limit exceeded error #{error}")
+            else
+              mark_delivered
+              log_info("#{@notification.id} sent to topic #{@notification.data['to']}")
+            end
           end
         end
 

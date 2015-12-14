@@ -5,7 +5,8 @@ module Rpush
         module Notification
           def self.included(base)
             base.instance_eval do
-              validates :registration_ids, presence: true
+              #reg_ids may not be presence for topic based push
+              #validates :registration_ids, presence: true
 
               validates_with Rpush::Client::ActiveModel::PayloadDataSizeValidator, limit: 4096
               validates_with Rpush::Client::ActiveModel::RegistrationIdsCountValidator, limit: 1000
@@ -16,11 +17,11 @@ module Rpush
 
           def as_json
             json = {
-              'registration_ids' => registration_ids,
               'delay_while_idle' => delay_while_idle
             }
-            json['data'] = data['data'] if data['data']
+            json['registration_ids'] = registration_ids if registration_ids
             json['to'] = data['to'] if data['to']
+            json['data'] = data['data'] if data['data']
             json['notification'] = data['notification'] if data['notification']
             json['collapse_key'] = collapse_key if collapse_key
             json['time_to_live'] = expiry if expiry
