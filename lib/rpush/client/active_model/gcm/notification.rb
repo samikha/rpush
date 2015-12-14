@@ -17,9 +17,11 @@ module Rpush
           def as_json
             json = {
               'registration_ids' => registration_ids,
-              'delay_while_idle' => delay_while_idle,
-              'data' => data
+              'delay_while_idle' => delay_while_idle
             }
+            json['data'] = data['data'] if data['data']
+            json['to'] = data['to'] if data['to']
+            json['notification'] = data['notification'] if data['notification']
             json['collapse_key'] = collapse_key if collapse_key
             json['time_to_live'] = expiry if expiry
             json
