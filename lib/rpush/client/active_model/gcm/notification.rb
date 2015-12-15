@@ -23,6 +23,7 @@ module Rpush
             json['to'] = data['to'] if data['to']
             json['data'] = data['data'] if data['data']
             json['notification'] = data['notification'] if data['notification']
+            json['priority'] = data['priority'] if data['priority']
             json['collapse_key'] = collapse_key if collapse_key
             json['time_to_live'] = expiry if expiry
             json
