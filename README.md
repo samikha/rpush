@@ -3,7 +3,7 @@
 
 <img src="https://raw.github.com/rpush/rpush/master/logo.png" align="right" width="200px" />
 
-NOTE: Intermidate forked from NeoElit to support gcm notification payload to support iOS gcm notifications
+NOTE: Intermidate forked from NeoElit to support gcm notification payload to support iOS gcm notifications, till the main branch supports it
 
 
 ### Rpush. The push notification service for Ruby.
