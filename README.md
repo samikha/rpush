@@ -3,6 +3,9 @@
 
 <img src="https://raw.github.com/rpush/rpush/master/logo.png" align="right" width="200px" />
 
+NOTE: Intermidate forked from NeoElit to support gcm notification payload to support iOS gcm notifications
+
+
 ### Rpush. The push notification service for Ruby.
 
 Rpush aims to be the *de facto* gem for sending push notifications in Ruby. Its core goals are ease of use, reliability and a rich feature set. Rpush provides numerous advanced features not found in others gems, giving you greater control & insight as your project grows. These are a few of the reasons why companies worldwide rely on Rpush to deliver their notifications.
