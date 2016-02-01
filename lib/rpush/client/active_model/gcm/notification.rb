@@ -21,7 +21,7 @@ module Rpush
             }
             json['registration_ids'] = registration_ids if registration_ids
             json['to'] = data['to'] if data['to']
-            json['data'] = data['data'] if data['data']
+            json['data'] = data['data'] if data['data'] && !data['notification']
             json['notification'] = data['notification'] if data['notification']
             json['priority'] = data['priority'] if data['priority']
             json['collapse_key'] = collapse_key if collapse_key
